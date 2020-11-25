@@ -69,7 +69,9 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
     switch (button->GetId())
     {
     case CALC_CLS:
-        /* code */
+            this->display->ChangeValue(DISPLAY_ZERO);
+            this->decimalPoint = false;
+            this->negative = false;
         break;
     case CALC_BACK:
         /* code */
