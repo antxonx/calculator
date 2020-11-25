@@ -6,6 +6,9 @@
 #include <wx/font.h>
 namespace Calculator
 {
+    const wxString DISPLAY_ZERO = "0";
+    const wxString DISPLAY_DECIMAL = ".";
+    const unsigned int DISPLAY_FONT_SIZE = 20;
     enum OPTIONS
     {
         CALC_0,
@@ -47,7 +50,7 @@ namespace Calculator
         CALC_DIV,
         CALC_POINT,
     };
-    const wxString DISPLAY_ZERO = "0";
+   
 
     class CalculatorWindow : public wxFrame
     {
@@ -57,7 +60,6 @@ namespace Calculator
     private:
         void onExit(wxCommandEvent &);
         void onClick(wxCommandEvent &);
-        void onInput(wxCommandEvent &);
         wxBoxSizer *box;
         wxGridSizer *grid;
         wxTextCtrl *display;

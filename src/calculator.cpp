@@ -8,11 +8,11 @@ CalculatorWindow::CalculatorWindow(wxSize size) : wxFrame(NULL, wxID_ANY, "Calcu
     this->negative = false;
     this->decimalPoint = false;
     //Font size
-    wxFont font = wxFont(wxFontInfo(20));
+    wxFont font = wxFont(wxFontInfo(DISPLAY_FONT_SIZE));
     //Container
     box = new wxBoxSizer(wxVERTICAL);
     //Display element
-    display = new wxTextCtrl(this, DISPLAY_id, DISPLAY_ZERO, wxDefaultPosition, wxDefaultSize, wxTE_RIGHT);
+    display = new wxTextCtrl(this, DISPLAY_id, DISPLAY_ZERO, wxDefaultPosition, wxDefaultSize, wxTE_RIGHT | wxTE_READONLY);
     display->SetFont(font);
     //Add displey to container
     box->Add(display, 0, wxEXPAND | wxTOP | wxBOTTOM, 10);
@@ -46,20 +46,14 @@ CalculatorWindow::CalculatorWindow(wxSize size) : wxFrame(NULL, wxID_ANY, "Calcu
     this->Centre();
     //Handle events
     this->Bind(wxEVT_MENU, &CalculatorWindow::onExit, this, wxID_EXIT);
-    //this->Bind(wxEVT_TEXT, &CalculatorWindow::onInput, this, DISPLAY_id);
     for(const Calculator::OPTIONS OPT : All){
         this->Bind(wxEVT_BUTTON, &CalculatorWindow::onClick, this, OPT);
     }
 }
 
-void CalculatorWindow::onExit(wxCommandEvent &event)
+void CalculatorWindow::onExit(wxCommandEvent &_)
 {
     this->Close(true);
-}
-
-void CalculatorWindow::onInput(wxCommandEvent &event)
-{
-    
 }
 
 void CalculatorWindow::onClick(wxCommandEvent &event) 
@@ -80,13 +74,11 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
             this->decimalPoint = false;
             this->negative = false;
         } else {
-            char tmp[25];
             char deleted = actualValue.Last();
-            if(deleted == '.') {
+            if(deleted == DISPLAY_DECIMAL) {
                 this->decimalPoint = false;
             }
             newValue = actualValue.substr(0, actualValue.length() - 1);
-            //wxStrncpy(tmp, actualValue.c_str(), actualValue.length() - 1);
             this->display->ChangeValue(newValue);
         }
         break;
@@ -101,7 +93,7 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
         break;
     case CALC_POINT:
         if(!this->decimalPoint) {
-            newValue = this->display->GetValue() + ".";
+            newValue = this->display->GetValue() + DISPLAY_DECIMAL;
             this->display->ChangeValue(newValue);
             this->decimalPoint = true;
         }
@@ -113,7 +105,7 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
         /* code */
         break;
     default:
-        if(actualValue.length() < 2 && actualValue.IsSameAs("0")) {
+        if(actualValue.length() < 2 && actualValue.IsSameAs(DISPLAY_ZERO)) {
              this->display->ChangeValue(button->GetLabelText());
         } else {
             newValue = this->display->GetValue() + button->GetLabelText();
