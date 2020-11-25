@@ -84,7 +84,11 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
         /* code */
         break;
     case CALC_POINT:
-        /* code */
+        if(!this->decimalPoint) {
+            newValue = this->display->GetValue() + ".";
+            this->display->ChangeValue(newValue);
+            this->decimalPoint = true;
+        }
         break;
     case CALC_EQUAL:
         /* code */
