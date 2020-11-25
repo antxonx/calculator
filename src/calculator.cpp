@@ -113,8 +113,12 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
         /* code */
         break;
     default:
-        newValue = this->display->GetValue() + button->GetLabelText();
-        this->display->ChangeValue(newValue);
+        if(actualValue.length() < 2 && actualValue.IsSameAs("0")) {
+             this->display->ChangeValue(button->GetLabelText());
+        } else {
+            newValue = this->display->GetValue() + button->GetLabelText();
+            this->display->ChangeValue(newValue);
+        }
         break;
     }
 }
