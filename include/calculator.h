@@ -2,14 +2,18 @@
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
 #endif
+#include <wx/grid.h>
 
-class MyFrame : public wxFrame
+class Calculator : public wxFrame
 {
 public:
-    MyFrame();
+    Calculator(wxSize);
 
 private:
     void OnHello(wxCommandEvent &event);
     void OnExit(wxCommandEvent &event);
     void OnAbout(wxCommandEvent &event);
+    wxBoxSizer *box;
+    wxGridSizer *grid;
+    wxTextCtrl *display;
 };

@@ -1,11 +1,12 @@
-#include "main.h"
-#include "myFrame.h"
+#include <main.h>
+#include <calculator.h>
 
 wxIMPLEMENT_APP(MyApp);
 
 bool MyApp::OnInit()
 {
-    MyFrame *frame = new MyFrame();
-    frame->Show(true);
+    Calculator *calculator = new Calculator(wxSize(400, 400));
+    calculator->Show(true);
+    SetTopWindow(calculator);
     return true;
 }
