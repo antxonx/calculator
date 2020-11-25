@@ -4,8 +4,10 @@
 #endif
 #include <wx/grid.h>
 #include <wx/font.h>
-namespace CALCULATOR{
-    enum OPTIONS {
+namespace Calculator
+{
+    enum OPTIONS
+    {
         CALC_0,
         CALC_1,
         CALC_2,
@@ -45,17 +47,19 @@ namespace CALCULATOR{
         CALC_DIV,
         CALC_POINT,
     };
-}
+    const wxString DISPLAY_ZERO = wxT("0");
 
-class Calculator : public wxFrame
-{
-public:
-    Calculator(wxSize);
+    class CalculatorWindow : public wxFrame
+    {
+    public:
+        CalculatorWindow(wxSize);
 
-private:
-    void onExit(wxCommandEvent &);
-    void onClick(wxCommandEvent &);
-    wxBoxSizer *box;
-    wxGridSizer *grid;
-    wxTextCtrl *display;
-};
+    private:
+        void onExit(wxCommandEvent &);
+        void onClick(wxCommandEvent &);
+        wxBoxSizer *box;
+        wxGridSizer *grid;
+        wxTextCtrl *display;
+    };
+
+} // namespace Calculator

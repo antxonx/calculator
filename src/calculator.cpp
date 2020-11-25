@@ -1,13 +1,15 @@
 #include <calculator.h>
 
-Calculator::Calculator(wxSize size) : wxFrame(NULL, wxID_ANY, "Calculator", wxDefaultPosition, size)
+using namespace Calculator;
+
+CalculatorWindow::CalculatorWindow(wxSize size) : wxFrame(NULL, wxID_ANY, "Calculator", wxDefaultPosition, size)
 {
     //Font size
     wxFont font = wxFont(wxFontInfo(20));
     //Container
     box = new wxBoxSizer(wxVERTICAL);
     //Display element
-    display = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDefaultSize, wxTE_RIGHT);
+    display = new wxTextCtrl(this, wxID_ANY, DISPLAY_ZERO, wxDefaultPosition, wxDefaultSize, wxTE_RIGHT);
     display->SetFont(font);
     //Add displey to container
     box->Add(display, 0, wxEXPAND | wxTOP | wxBOTTOM, 10);
@@ -16,72 +18,75 @@ Calculator::Calculator(wxSize size) : wxFrame(NULL, wxID_ANY, "Calculator", wxDe
     //Buttons definitions
     grid->Add(new wxStaticText(this, wxID_ANY, wxT("")), 0, wxEXPAND);
     grid->Add(new wxStaticText(this, wxID_ANY, wxT("")), 0, wxEXPAND);
-    grid->Add(new wxButton(this, CALCULATOR::CALC_CLS, wxT("CLS")), 0, wxEXPAND);
-    grid->Add(new wxButton(this, CALCULATOR::CALC_BACK, wxT("<-")), 0, wxEXPAND);
-    grid->Add(new wxButton(this, CALCULATOR::CALC_7, wxT("7")), 0, wxEXPAND); 
-    grid->Add(new wxButton(this, CALCULATOR::CALC_8, wxT("8")), 0, wxEXPAND);
-    grid->Add(new wxButton(this, CALCULATOR::CALC_9, wxT("9")), 0, wxEXPAND);
-    grid->Add(new wxButton(this, CALCULATOR::CALC_DIV, wxT("/")), 0, wxEXPAND);
-    grid->Add(new wxButton(this, CALCULATOR::CALC_4, wxT("4")), 0, wxEXPAND);
-    grid->Add(new wxButton(this, CALCULATOR::CALC_5, wxT("5")), 0, wxEXPAND);
-    grid->Add(new wxButton(this, CALCULATOR::CALC_6, wxT("6")), 0, wxEXPAND);
-    grid->Add(new wxButton(this, CALCULATOR::CALC_TIMES, wxT("*")), 0, wxEXPAND);
-    grid->Add(new wxButton(this, CALCULATOR::CALC_1, wxT("1")), 0, wxEXPAND);
-    grid->Add(new wxButton(this, CALCULATOR::CALC_2, wxT("2")), 0, wxEXPAND);
-    grid->Add(new wxButton(this, CALCULATOR::CALC_3, wxT("3")), 0, wxEXPAND);
-    grid->Add(new wxButton(this, CALCULATOR::CALC_MINUS, wxT("-")), 0, wxEXPAND);
-    grid->Add(new wxButton(this, CALCULATOR::CALC_0, wxT("0")), 0, wxEXPAND);
-    grid->Add(new wxButton(this, CALCULATOR::CALC_POINT, wxT(".")), 0, wxEXPAND);
-    grid->Add(new wxButton(this, CALCULATOR::CALC_EQUAL, wxT("=")), 0, wxEXPAND);
-    grid->Add(new wxButton(this, CALCULATOR::CALC_PLUS, wxT("+")), 0, wxEXPAND);
+    grid->Add(new wxButton(this, CALC_CLS, wxT("CLS")), 0, wxEXPAND);
+    grid->Add(new wxButton(this, CALC_BACK, wxT("<-")), 0, wxEXPAND);
+    grid->Add(new wxButton(this, CALC_7, wxT("7")), 0, wxEXPAND); 
+    grid->Add(new wxButton(this, CALC_8, wxT("8")), 0, wxEXPAND);
+    grid->Add(new wxButton(this, CALC_9, wxT("9")), 0, wxEXPAND);
+    grid->Add(new wxButton(this, CALC_DIV, wxT("/")), 0, wxEXPAND);
+    grid->Add(new wxButton(this, CALC_4, wxT("4")), 0, wxEXPAND);
+    grid->Add(new wxButton(this, CALC_5, wxT("5")), 0, wxEXPAND);
+    grid->Add(new wxButton(this, CALC_6, wxT("6")), 0, wxEXPAND);
+    grid->Add(new wxButton(this, CALC_TIMES, wxT("*")), 0, wxEXPAND);
+    grid->Add(new wxButton(this, CALC_1, wxT("1")), 0, wxEXPAND);
+    grid->Add(new wxButton(this, CALC_2, wxT("2")), 0, wxEXPAND);
+    grid->Add(new wxButton(this, CALC_3, wxT("3")), 0, wxEXPAND);
+    grid->Add(new wxButton(this, CALC_MINUS, wxT("-")), 0, wxEXPAND);
+    grid->Add(new wxButton(this, CALC_0, Calculator::DISPLAY_ZERO), 0, wxEXPAND);
+    grid->Add(new wxButton(this, CALC_POINT, wxT(".")), 0, wxEXPAND);
+    grid->Add(new wxButton(this, CALC_EQUAL, wxT("=")), 0, wxEXPAND);
+    grid->Add(new wxButton(this, CALC_PLUS, wxT("+")), 0, wxEXPAND);
     //Add buttons grid to container
     box->Add(grid, 1, wxEXPAND);
     SetSizer(box);
     SetMinSize(size);
     Centre();
     //Handle events
-    this->Bind(wxEVT_MENU, &Calculator::onExit, this, wxID_EXIT);
-    for(const CALCULATOR::OPTIONS OPT : CALCULATOR::All){
-        this->Bind(wxEVT_BUTTON, &Calculator::onClick, this, OPT);
+    this->Bind(wxEVT_MENU, &CalculatorWindow::onExit, this, wxID_EXIT);
+    for(const Calculator::OPTIONS OPT : All){
+        this->Bind(wxEVT_BUTTON, &CalculatorWindow::onClick, this, OPT);
     }
 }
 
-void Calculator::onExit(wxCommandEvent &event)
+void CalculatorWindow::onExit(wxCommandEvent &event)
 {
     Close(true);
 }
 
-void Calculator::onClick(wxCommandEvent &event) 
+void CalculatorWindow::onClick(wxCommandEvent &event) 
 {
+    wxString actualDisplay, newDigit;
     wxButton *button = wxDynamicCast(event.GetEventObject(), wxButton);
     switch (button->GetId())
     {
-    case CALCULATOR::CALC_CLS:
+    case CALC_CLS:
         /* code */
         break;
-    case CALCULATOR::CALC_BACK:
+    case CALC_BACK:
         /* code */
         break;
-    case CALCULATOR::CALC_DIV:
+    case CALC_DIV:
         /* code */
         break;
-    case CALCULATOR::CALC_TIMES:
+    case CALC_TIMES:
         /* code */
         break;
-    case CALCULATOR::CALC_MINUS:
+    case CALC_MINUS:
         /* code */
         break;
-    case CALCULATOR::CALC_POINT:
+    case CALC_POINT:
         /* code */
         break;
-    case CALCULATOR::CALC_EQUAL:
+    case CALC_EQUAL:
         /* code */
         break;
-    case CALCULATOR::CALC_PLUS:
+    case CALC_PLUS:
         /* code */
         break;
     default:
-        this->display->SetLabelText(this->display->GetLabel() + button->GetLabel());
+        actualDisplay = this->display->GetLabel();
+        newDigit = button->GetLabel();
+        this->display->SetLabelText(actualDisplay + newDigit);
         break;
     }
 }

@@ -5,7 +5,7 @@ wxIMPLEMENT_APP(MyApp);
 
 bool MyApp::OnInit()
 {
-    Calculator *calculator = new Calculator(wxSize(400, 400));
+    Calculator::CalculatorWindow *calculator = new Calculator::CalculatorWindow(wxSize(400, 400));
     calculator->Show(true);
     SetTopWindow(calculator);
     return true;
