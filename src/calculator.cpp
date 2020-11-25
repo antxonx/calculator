@@ -66,6 +66,7 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
 {
     wxString newValue;
     wxButton *button = wxDynamicCast(event.GetEventObject(), wxButton);
+    wxString actualValue = this->display->GetValue();
     switch (button->GetId())
     {
     case CALC_CLS:
@@ -74,7 +75,20 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
             this->negative = false;
         break;
     case CALC_BACK:
-        /* code */
+        if(actualValue.length() < 2){
+            this->display->ChangeValue(DISPLAY_ZERO);
+            this->decimalPoint = false;
+            this->negative = false;
+        } else {
+            char tmp[25];
+            char deleted = actualValue.Last();
+            if(deleted == '.') {
+                this->decimalPoint = false;
+            }
+            newValue = actualValue.substr(0, actualValue.length() - 1);
+            //wxStrncpy(tmp, actualValue.c_str(), actualValue.length() - 1);
+            this->display->ChangeValue(newValue);
+        }
         break;
     case CALC_DIV:
         /* code */
