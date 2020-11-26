@@ -156,7 +156,13 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
         /* code */
         break;
     case CALC_NEGATIVE:
-        /* code */
+        if(this->negative) {
+            newValue = actualValue.substr(1, actualValue.length());
+        } else {
+            newValue = "-" + this->display->GetValue();
+        }
+        this->negative = !this->negative;
+        this->display->ChangeValue(newValue);
         break;
     default:
         if(actualValue.length() < 2 && actualValue.IsSameAs(DISPLAY_ZERO)) {
