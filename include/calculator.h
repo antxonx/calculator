@@ -71,12 +71,15 @@ namespace Calculator
         void clearScreen();
         bool isDisplayZero();
         bool isDisplayOneDigit();
+        void operate();
         wxBoxSizer *box;
         wxGridSizer *grid;
         wxTextCtrl *display;
         bool decimalPoint;
         bool negative;
+        bool newValue;
         OPER oper;
+        double stored;
     };
 
 } // namespace Calculator
