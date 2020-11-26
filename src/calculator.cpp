@@ -220,7 +220,6 @@ void CalculatorWindow::clearScreen()
     this->display->ChangeValue(DISPLAY_ZERO);
     this->decimalPoint = false;
     this->negative = false;
-    this->stored = 0.0;
 }
 
 bool CalculatorWindow::isDisplayZero()
