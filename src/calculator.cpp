@@ -290,5 +290,6 @@ void CalculatorWindow::operate()
     }
     strncpy(output, preoutput, i);
     output[i] = 0;
+    this->negative = (output[0] == '-');
     this->display->ChangeValue(output);
 }
