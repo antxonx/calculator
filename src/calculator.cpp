@@ -124,6 +124,7 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
     {
     case CALC_CLS:
         this->clearScreen();
+        this->stored = 0.0;
         this->oper = OP_NONE;
         break;
     case CALC_BACK:
