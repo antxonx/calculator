@@ -18,7 +18,7 @@ namespace Calculator
         OP_SUB,
         OP_TIMES,
         OP_DIV
-    }OPER;
+    } OPER;
     enum OPTIONS
     {
         CALC_0,
