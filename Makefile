@@ -7,7 +7,7 @@
 CXX = g++
 
 # define any compile-time flags
-CXXFLAGS	:= -std=c++17 -Wall -Wextra -g
+CXXFLAGS	:= -std=c++17 -Wall -Wextra -g `wx-config --cxxflags --libs std`
 
 # define library paths in addition to /usr/lib
 #   if I wanted to include libraries not in /usr/lib I'd specify
@@ -55,7 +55,7 @@ SOURCES		:= $(wildcard $(patsubst %,%/*.cpp, $(SOURCEDIRS)))
 
 # define the C object files 
 OBJECTS		:= $(SOURCES:.cpp=.o)
-DLLS        := $(wildcard $(patsubst %,%/*.dll, $(SOURCEDIRS)))
+LIBS        := $(wildcard $(patsubst %,%/*.a, $(SOURCEDIRS)))
 
 #
 # The following part of the makefile is generic; it can be used to 
@@ -72,7 +72,7 @@ $(OUTPUT):
 	$(MD) $(OUTPUT)
 
 $(MAIN): $(OBJECTS) 
-	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $(OUTPUTMAIN) $(OBJECTS) $(DLLS) $(LFLAGS) $(LIBS)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $(OUTPUTMAIN) $(OBJECTS) $(LIBS) $(LFLAGS) $(LIBS)
 
 # this is a suffix replacement rule for building .o's from .c's
 # it uses automatic variables $<: the name of the prerequisite of
