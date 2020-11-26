@@ -258,7 +258,7 @@ void CalculatorWindow::operate()
     double screenValue;
     char output[DISPLAY_BURFFER_SIZE], preoutput[DISPLAY_BURFFER_SIZE];
     int i;
-    bool decimal = false;;
+    this->decimalPoint = false;
     this->display->GetValue().ToDouble(&screenValue);
     switch (this->oper)
     {
@@ -280,12 +280,12 @@ void CalculatorWindow::operate()
     }
     strncpy(preoutput, wxString::Format("%f", this->stored).mb_str().data(), DISPLAY_BURFFER_SIZE);
     for(i = DISPLAY_BURFFER_SIZE-1; i >= 0; i--) {
-        decimal = (preoutput[i] != '0' && preoutput[i] != 0 && preoutput[i] != '.');
-        if(preoutput[i] == '.' || decimal){
+        this->decimalPoint = (preoutput[i] != '0' && preoutput[i] != 0 && preoutput[i] != '.');
+        if(preoutput[i] == '.' || this->decimalPoint){
             break;
         }
     }
-    if(decimal) {
+    if(this->decimalPoint) {
         i++;   
     }
     strncpy(output, preoutput, i);
