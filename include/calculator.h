@@ -9,6 +9,14 @@ namespace Calculator
     const wxString DISPLAY_ZERO = "0";
     const wxString DISPLAY_DECIMAL = ".";
     const unsigned int DISPLAY_FONT_SIZE = 20;
+    typedef enum
+    {
+        OP_NONE,
+        OP_ADD,
+        OP_SUB,
+        OP_TIMES,
+        OP_DIV
+    }OPER;
     enum OPTIONS
     {
         CALC_0,
@@ -50,9 +58,7 @@ namespace Calculator
         CALC_TIMES,
         CALC_DIV,
         CALC_POINT,
-        CALC_NEGATIVE
-    };
-   
+        CALC_NEGATIVE};
 
     class CalculatorWindow : public wxFrame
     {
@@ -70,6 +76,7 @@ namespace Calculator
         wxTextCtrl *display;
         bool decimalPoint;
         bool negative;
+        OPER oper;
     };
 
 } // namespace Calculator

@@ -8,6 +8,7 @@ CalculatorWindow::CalculatorWindow(wxSize size) : wxFrame(NULL, wxID_ANY, "Calcu
     const int DISPLAY_id = 100;
     this->negative = false;
     this->decimalPoint = false;
+    this->oper = OP_NONE;
     //Font size
     wxFont font = wxFont(wxFontInfo(DISPLAY_FONT_SIZE + 10));
     //Container
@@ -121,6 +122,7 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
     {
     case CALC_CLS:
         this->clearScreen();
+        this->oper = OP_NONE;
         break;
     case CALC_BACK:
         if (this->isDisplayOneDigit())
@@ -136,6 +138,10 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
             }
             newValue = actualValue.substr(0, actualValue.length() - 1);
             this->display->ChangeValue(newValue);
+            if (this->isDisplayZero())
+            {
+                this->clearScreen();
+            }
         }
         break;
     case CALC_POINT:
@@ -147,19 +153,19 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
         }
         break;
     case CALC_DIV:
-        /* code */
+        this->oper = OP_DIV;
         break;
     case CALC_TIMES:
-        /* code */
+        this->oper = OP_TIMES;
         break;
     case CALC_MINUS:
-        /* code */
+        this->oper = OP_SUB;
         break;
     case CALC_PLUS:
-        /* code */
+        this->oper = OP_ADD;
         break;
     case CALC_EQUAL:
-        /* code */
+        this->oper = OP_NONE;
         break;
     case CALC_NEGATIVE:
         if (!this->isDisplayZero())
