@@ -4,11 +4,21 @@
 #endif
 #include <wx/grid.h>
 #include <wx/font.h>
+#include <cstring>
 namespace Calculator
 {
     const wxString DISPLAY_ZERO = "0";
     const wxString DISPLAY_DECIMAL = ".";
     const unsigned int DISPLAY_FONT_SIZE = 20;
+    const unsigned int DISPLAY_BURFFER_SIZE = 50;
+    typedef enum
+    {
+        OP_NONE,
+        OP_ADD,
+        OP_SUB,
+        OP_TIMES,
+        OP_DIV
+    }OPER;
     enum OPTIONS
     {
         CALC_0,
@@ -50,9 +60,7 @@ namespace Calculator
         CALC_TIMES,
         CALC_DIV,
         CALC_POINT,
-        CALC_NEGATIVE
-    };
-   
+        CALC_NEGATIVE};
 
     class CalculatorWindow : public wxFrame
     {
@@ -65,11 +73,15 @@ namespace Calculator
         void clearScreen();
         bool isDisplayZero();
         bool isDisplayOneDigit();
+        void operate();
         wxBoxSizer *box;
         wxGridSizer *grid;
         wxTextCtrl *display;
         bool decimalPoint;
         bool negative;
+        bool newValue;
+        OPER oper;
+        double stored;
     };
 
 } // namespace Calculator

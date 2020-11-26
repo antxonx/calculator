@@ -8,6 +8,9 @@ CalculatorWindow::CalculatorWindow(wxSize size) : wxFrame(NULL, wxID_ANY, "Calcu
     const int DISPLAY_id = 100;
     this->negative = false;
     this->decimalPoint = false;
+    this->newValue = false;
+    this->oper = OP_NONE;
+    this->stored = 0.0;
     //Font size
     wxFont font = wxFont(wxFontInfo(DISPLAY_FONT_SIZE + 10));
     //Container
@@ -121,6 +124,7 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
     {
     case CALC_CLS:
         this->clearScreen();
+        this->oper = OP_NONE;
         break;
     case CALC_BACK:
         if (this->isDisplayOneDigit())
@@ -136,6 +140,10 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
             }
             newValue = actualValue.substr(0, actualValue.length() - 1);
             this->display->ChangeValue(newValue);
+            if (this->isDisplayZero())
+            {
+                this->clearScreen();
+            }
         }
         break;
     case CALC_POINT:
@@ -147,19 +155,31 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
         }
         break;
     case CALC_DIV:
-        /* code */
+        this->operate();
+        this->newValue = true;
+        this->oper = OP_DIV;
         break;
     case CALC_TIMES:
-        /* code */
+        this->operate();
+        this->newValue = true;
+        this->oper = OP_TIMES;
         break;
     case CALC_MINUS:
-        /* code */
+        this->operate();
+        this->newValue = true;
+        this->oper = OP_SUB;
         break;
     case CALC_PLUS:
-        /* code */
+        this->operate();
+        this->newValue = true;
+        this->oper = OP_ADD;
         break;
     case CALC_EQUAL:
-        /* code */
+        if (!this->oper == OP_NONE)
+        {
+            this->operate();
+        }
+        this->oper = OP_NONE;
         break;
     case CALC_NEGATIVE:
         if (!this->isDisplayZero())
@@ -177,6 +197,10 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
         }
         break;
     default:
+        if (this->newValue)
+        {
+            this->clearScreen();
+        }
         if (this->isDisplayZero())
         {
             this->display->ChangeValue(button->GetLabelText());
@@ -186,6 +210,7 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
             newValue = this->display->GetValue() + button->GetLabelText();
             this->display->ChangeValue(newValue);
         }
+        this->newValue = false;
         break;
     }
 }
@@ -226,4 +251,44 @@ bool CalculatorWindow::isDisplayOneDigit()
     {
         return (this->display->GetValue().length() < 2);
     }
+}
+
+void CalculatorWindow::operate()
+{
+    double screenValue;
+    char output[DISPLAY_BURFFER_SIZE], preoutput[DISPLAY_BURFFER_SIZE];
+    int i;
+    bool decimal = false;;
+    this->display->GetValue().ToDouble(&screenValue);
+    switch (this->oper)
+    {
+    case OP_ADD:
+        this->stored = (this->stored + screenValue);
+        break;
+    case OP_SUB:
+        this->stored = this->stored - screenValue;
+        break;
+    case OP_TIMES:
+        this->stored = this->stored * screenValue;
+        break;
+    case OP_DIV:
+        this->stored = this->stored / screenValue;
+        break;
+    default:
+        this->stored = screenValue;
+        break;
+    }
+    strncpy(preoutput, wxString::Format("%f", this->stored).mb_str().data(), DISPLAY_BURFFER_SIZE);
+    for(i = DISPLAY_BURFFER_SIZE-1; i >= 0; i--) {
+        decimal = (preoutput[i] != '0' && preoutput[i] != 0 && preoutput[i] != '.');
+        if(preoutput[i] == '.' || decimal){
+            break;
+        }
+    }
+    if(decimal) {
+        i++;   
+    }
+    strncpy(output, preoutput, i);
+    output[i] = 0;
+    this->display->ChangeValue(output);
 }
