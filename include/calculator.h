@@ -29,6 +29,7 @@ namespace Calculator
         CALC_TIMES,
         CALC_DIV,
         CALC_POINT,
+        CALC_NEGATIVE
     };
     const OPTIONS All[] = {
         CALC_0,
@@ -49,6 +50,7 @@ namespace Calculator
         CALC_TIMES,
         CALC_DIV,
         CALC_POINT,
+        CALC_NEGATIVE
     };
    
 
@@ -60,6 +62,7 @@ namespace Calculator
     private:
         void onExit(wxCommandEvent &);
         void onClick(wxCommandEvent &);
+        void clearScreen();
         wxBoxSizer *box;
         wxGridSizer *grid;
         wxTextCtrl *display;
