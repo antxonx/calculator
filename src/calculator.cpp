@@ -8,7 +8,9 @@ CalculatorWindow::CalculatorWindow(wxSize size) : wxFrame(NULL, wxID_ANY, "Calcu
     const int DISPLAY_id = 100;
     this->negative = false;
     this->decimalPoint = false;
+    this->newValue = false;
     this->oper = OP_NONE;
+    this->stored = 0.0;
     //Font size
     wxFont font = wxFont(wxFontInfo(DISPLAY_FONT_SIZE + 10));
     //Container
@@ -153,18 +155,30 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
         }
         break;
     case CALC_DIV:
+        this->operate();
+        this->newValue = true;
         this->oper = OP_DIV;
         break;
     case CALC_TIMES:
+        this->operate();
+        this->newValue = true;
         this->oper = OP_TIMES;
         break;
     case CALC_MINUS:
+        this->operate();
+        this->newValue = true;
         this->oper = OP_SUB;
         break;
     case CALC_PLUS:
+        this->operate();
+        this->newValue = true;
         this->oper = OP_ADD;
         break;
     case CALC_EQUAL:
+        if (!this->oper == OP_NONE)
+        {
+            this->operate();
+        }
         this->oper = OP_NONE;
         break;
     case CALC_NEGATIVE:
@@ -183,6 +197,10 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
         }
         break;
     default:
+        if (this->newValue)
+        {
+            this->clearScreen();
+        }
         if (this->isDisplayZero())
         {
             this->display->ChangeValue(button->GetLabelText());
@@ -192,6 +210,7 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
             newValue = this->display->GetValue() + button->GetLabelText();
             this->display->ChangeValue(newValue);
         }
+        this->newValue = false;
         break;
     }
 }
@@ -232,4 +251,29 @@ bool CalculatorWindow::isDisplayOneDigit()
     {
         return (this->display->GetValue().length() < 2);
     }
+}
+
+void CalculatorWindow::operate()
+{
+    double screenValue;
+    this->display->GetValue().ToDouble(&screenValue);
+    switch (this->oper)
+    {
+    case OP_ADD:
+        this->stored = (this->stored + screenValue);
+        break;
+    case OP_SUB:
+        this->stored = this->stored - screenValue;
+        break;
+    case OP_TIMES:
+        this->stored = this->stored * screenValue;
+        break;
+    case OP_DIV:
+        this->stored = this->stored / screenValue;
+        break;
+    default:
+        this->stored = screenValue;
+        break;
+    }
+    this->display->ChangeValue(wxString::Format("%f", this->stored));
 }
