@@ -41,7 +41,7 @@ CalculatorWindow::CalculatorWindow(wxSize size) : wxFrame(NULL, wxID_ANY, "Calcu
     //3->
     button = new wxButton(this, CALC_7, "7");
     button->SetFont(font);
-    grid->Add(button, 0, wxEXPAND); 
+    grid->Add(button, 0, wxEXPAND);
     button = new wxButton(this, CALC_8, "8");
     button->SetFont(font);
     grid->Add(button, 0, wxEXPAND);
@@ -101,7 +101,8 @@ CalculatorWindow::CalculatorWindow(wxSize size) : wxFrame(NULL, wxID_ANY, "Calcu
     this->Centre();
     //Handle events
     this->Bind(wxEVT_MENU, &CalculatorWindow::onExit, this, wxID_EXIT);
-    for(const Calculator::OPTIONS OPT : All){
+    for (const Calculator::OPTIONS OPT : All)
+    {
         this->Bind(wxEVT_BUTTON, &CalculatorWindow::onClick, this, OPT);
     }
 }
@@ -111,7 +112,7 @@ void CalculatorWindow::onExit(wxCommandEvent &_)
     this->Close(true);
 }
 
-void CalculatorWindow::onClick(wxCommandEvent &event) 
+void CalculatorWindow::onClick(wxCommandEvent &event)
 {
     wxString newValue;
     wxButton *button = wxDynamicCast(event.GetEventObject(), wxButton);
@@ -119,18 +120,30 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
     switch (button->GetId())
     {
     case CALC_CLS:
-            this->clearScreen();
+        this->clearScreen();
         break;
     case CALC_BACK:
-        if(actualValue.length() < 2){
-           this->clearScreen();
-        } else {
+        if (this->isDisplayOneDigit())
+        {
+            this->clearScreen();
+        }
+        else
+        {
             char deleted = actualValue.Last();
-            if(deleted == DISPLAY_DECIMAL) {
+            if (deleted == DISPLAY_DECIMAL)
+            {
                 this->decimalPoint = false;
             }
             newValue = actualValue.substr(0, actualValue.length() - 1);
             this->display->ChangeValue(newValue);
+        }
+        break;
+    case CALC_POINT:
+        if (!this->decimalPoint)
+        {
+            newValue = this->display->GetValue() + DISPLAY_DECIMAL;
+            this->display->ChangeValue(newValue);
+            this->decimalPoint = true;
         }
         break;
     case CALC_DIV:
@@ -142,32 +155,34 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
     case CALC_MINUS:
         /* code */
         break;
-    case CALC_POINT:
-        if(!this->decimalPoint) {
-            newValue = this->display->GetValue() + DISPLAY_DECIMAL;
-            this->display->ChangeValue(newValue);
-            this->decimalPoint = true;
-        }
+    case CALC_PLUS:
+        /* code */
         break;
     case CALC_EQUAL:
         /* code */
         break;
-    case CALC_PLUS:
-        /* code */
-        break;
     case CALC_NEGATIVE:
-        if(this->negative) {
-            newValue = actualValue.substr(1, actualValue.length());
-        } else {
-            newValue = "-" + this->display->GetValue();
+        if (!this->isDisplayZero())
+        {
+            if (this->negative)
+            {
+                newValue = actualValue.substr(1, actualValue.length());
+            }
+            else
+            {
+                newValue = "-" + this->display->GetValue();
+            }
+            this->negative = !this->negative;
+            this->display->ChangeValue(newValue);
         }
-        this->negative = !this->negative;
-        this->display->ChangeValue(newValue);
         break;
     default:
-        if(actualValue.length() < 2 && actualValue.IsSameAs(DISPLAY_ZERO)) {
-             this->display->ChangeValue(button->GetLabelText());
-        } else {
+        if (this->isDisplayZero())
+        {
+            this->display->ChangeValue(button->GetLabelText());
+        }
+        else
+        {
             newValue = this->display->GetValue() + button->GetLabelText();
             this->display->ChangeValue(newValue);
         }
@@ -180,4 +195,35 @@ void CalculatorWindow::clearScreen()
     this->display->ChangeValue(DISPLAY_ZERO);
     this->decimalPoint = false;
     this->negative = false;
+}
+
+bool CalculatorWindow::isDisplayZero()
+{
+    if (this->isDisplayOneDigit())
+    {
+        if (this->negative)
+        {
+            return (this->display->GetValue().IsSameAs("-" + DISPLAY_ZERO));
+        }
+        else
+        {
+            return (this->display->GetValue().IsSameAs(DISPLAY_ZERO));
+        }
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool CalculatorWindow::isDisplayOneDigit()
+{
+    if (this->negative)
+    {
+        return (this->display->GetValue().length() < 3);
+    }
+    else
+    {
+        return (this->display->GetValue().length() < 2);
+    }
 }

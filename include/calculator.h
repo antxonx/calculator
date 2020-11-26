@@ -63,6 +63,8 @@ namespace Calculator
         void onExit(wxCommandEvent &);
         void onClick(wxCommandEvent &);
         void clearScreen();
+        bool isDisplayZero();
+        bool isDisplayOneDigit();
         wxBoxSizer *box;
         wxGridSizer *grid;
         wxTextCtrl *display;
