@@ -280,14 +280,17 @@ void CalculatorWindow::operate()
         break;
     }
     strncpy(preoutput, wxString::Format("%f", this->stored).mb_str().data(), DISPLAY_BURFFER_SIZE);
-    for(i = DISPLAY_BURFFER_SIZE-1; i >= 0; i--) {
+    for (i = DISPLAY_BURFFER_SIZE - 1; i >= 0; i--)
+    {
         this->decimalPoint = (preoutput[i] != '0' && preoutput[i] != 0 && preoutput[i] != '.');
-        if(preoutput[i] == '.' || this->decimalPoint){
+        if (preoutput[i] == '.' || this->decimalPoint)
+        {
             break;
         }
     }
-    if(this->decimalPoint) {
-        i++;   
+    if (this->decimalPoint)
+    {
+        i++;
     }
     strncpy(output, preoutput, i);
     output[i] = 0;
