@@ -220,6 +220,7 @@ void CalculatorWindow::clearScreen()
     this->display->ChangeValue(DISPLAY_ZERO);
     this->decimalPoint = false;
     this->negative = false;
+    this->stored = 0.0;
 }
 
 bool CalculatorWindow::isDisplayZero()
@@ -256,6 +257,9 @@ bool CalculatorWindow::isDisplayOneDigit()
 void CalculatorWindow::operate()
 {
     double screenValue;
+    char output[DISPLAY_BURFFER_SIZE], preoutput[DISPLAY_BURFFER_SIZE];
+    int i;
+    bool decimal = false;;
     this->display->GetValue().ToDouble(&screenValue);
     switch (this->oper)
     {
@@ -275,5 +279,17 @@ void CalculatorWindow::operate()
         this->stored = screenValue;
         break;
     }
-    this->display->ChangeValue(wxString::Format("%f", this->stored));
+    strncpy(preoutput, wxString::Format("%f", this->stored).mb_str().data(), DISPLAY_BURFFER_SIZE);
+    for(i = DISPLAY_BURFFER_SIZE-1; i >= 0; i--) {
+        decimal = (preoutput[i] != '0' && preoutput[i] != 0 && preoutput[i] != '.');
+        if(preoutput[i] == '.' || decimal){
+            break;
+        }
+    }
+    if(decimal) {
+        i++;   
+    }
+    strncpy(output, preoutput, i);
+    output[i] = 0;
+    this->display->ChangeValue(output);
 }
