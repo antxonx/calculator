@@ -1,3 +1,5 @@
+#ifndef CALCULATOR_H
+#define CALCULATOR_H
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
@@ -5,6 +7,7 @@
 #include <wx/grid.h>
 #include <wx/font.h>
 #include <cstring>
+#include <calcmath/arith.hh>
 namespace Calculator
 {
     const wxString DISPLAY_ZERO = "0";
@@ -85,3 +88,4 @@ namespace Calculator
     };
 
 } // namespace Calculator
+#endif

@@ -1,5 +1,5 @@
-#include <main.h>
-#include <calculator.h>
+#include <main.hh>
+#include <calculator.hh>
 #include <exception>
 
 wxIMPLEMENT_APP(MyApp);
