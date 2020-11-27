@@ -14,6 +14,7 @@ namespace Calculator
     const wxString DISPLAY_DECIMAL = ".";
     const unsigned int DISPLAY_FONT_SIZE = 20;
     const unsigned int DISPLAY_BURFFER_SIZE = 50;
+    const unsigned int DISPLAY_ID = 50;
     typedef enum
     {
         OP_NONE,
@@ -71,6 +72,7 @@ namespace Calculator
         CalculatorWindow(wxSize);
 
     private:
+        void build();
         void onExit(wxCommandEvent &);
         void onClick(wxCommandEvent &);
         void clearScreen();
@@ -85,6 +87,7 @@ namespace Calculator
         bool newValue;
         OPER oper;
         double stored;
+        wxSize size;
     };
 
 } // namespace Calculator

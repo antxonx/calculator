@@ -4,19 +4,24 @@ using namespace Calculator;
 
 CalculatorWindow::CalculatorWindow(wxSize size) : wxFrame(NULL, wxID_ANY, "Calculator", wxDefaultPosition, size)
 {
-    wxButton *button;
-    const int DISPLAY_id = 100;
     this->negative = false;
     this->decimalPoint = false;
     this->newValue = false;
     this->oper = OP_NONE;
     this->stored = 0.0;
+    this->size = size;
+    this->build();
+}
+
+void CalculatorWindow::build()
+{
+    wxButton *button;
     //Font size
     wxFont font = wxFont(wxFontInfo(DISPLAY_FONT_SIZE + 10));
     //Container
     this->box = new wxBoxSizer(wxVERTICAL);
     //Display element
-    this->display = new wxTextCtrl(this, DISPLAY_id, DISPLAY_ZERO, wxDefaultPosition, wxDefaultSize, wxTE_RIGHT | wxTE_READONLY);
+    this->display = new wxTextCtrl(this, DISPLAY_ID, DISPLAY_ZERO, wxDefaultPosition, wxDefaultSize, wxTE_RIGHT | wxTE_READONLY);
     this->display->SetFont(font);
     //Add displey to container
     this->box->Add(this->display, 0, wxEXPAND | wxTOP | wxBOTTOM, 10);
@@ -100,7 +105,7 @@ CalculatorWindow::CalculatorWindow(wxSize size) : wxFrame(NULL, wxID_ANY, "Calcu
     //Add buttons grid to container
     this->box->Add(this->grid, 1, wxEXPAND);
     this->SetSizer(this->box);
-    this->SetMinSize(size);
+    this->SetMinSize(this->size);
     this->Centre();
     //Handle events
     this->Bind(wxEVT_MENU, &CalculatorWindow::onExit, this, wxID_EXIT);
