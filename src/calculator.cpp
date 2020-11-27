@@ -46,7 +46,7 @@ void CalculatorWindow::build()
     button = new wxButton(this, CALC_SQUARE_ROOT, L"\u221A");
     button->SetFont(font);
     this->grid->Add(button, 0, wxEXPAND);
-    button = new wxButton(this, CALC_DIV, "/");
+    button = new wxButton(this, CALC_DIV, L"\u00F7");
     button->SetFont(font);
     this->grid->Add(button, 0, wxEXPAND);
     //<-2
@@ -60,7 +60,7 @@ void CalculatorWindow::build()
     button = new wxButton(this, CALC_9, "9");
     button->SetFont(font);
     this->grid->Add(button, 0, wxEXPAND);
-    button = new wxButton(this, CALC_TIMES, "*");
+    button = new wxButton(this, CALC_TIMES, L"\u2A2F");
     button->SetFont(font);
     this->grid->Add(button, 0, wxEXPAND);
     //<-3
@@ -74,7 +74,7 @@ void CalculatorWindow::build()
     button = new wxButton(this, CALC_6, "6");
     button->SetFont(font);
     this->grid->Add(button, 0, wxEXPAND);
-    button = new wxButton(this, CALC_MINUS, "-");
+    button = new wxButton(this, CALC_MINUS, L"\u2212");
     button->SetFont(font);
     this->grid->Add(button, 0, wxEXPAND);
     //<-4
@@ -88,12 +88,12 @@ void CalculatorWindow::build()
     button = new wxButton(this, CALC_3, "3");
     button->SetFont(font);
     this->grid->Add(button, 0, wxEXPAND);
-    button = new wxButton(this, CALC_PLUS, "+");
+    button = new wxButton(this, CALC_PLUS, L"\u002B");
     button->SetFont(font);
     this->grid->Add(button, 0, wxEXPAND);
     //<-5
     //6->
-    button = new wxButton(this, CALC_NEGATIVE, "+/-");
+    button = new wxButton(this, CALC_NEGATIVE, L"\u207A\u2044\u208B");
     button->SetFont(font);
     this->grid->Add(button, 0, wxEXPAND);
     button = new wxButton(this, CALC_0, Calculator::DISPLAY_ZERO);
@@ -102,7 +102,7 @@ void CalculatorWindow::build()
     button = new wxButton(this, CALC_POINT, ".");
     button->SetFont(font);
     this->grid->Add(button, 0, wxEXPAND);
-    button = new wxButton(this, CALC_EQUAL, "=");
+    button = new wxButton(this, CALC_EQUAL, L"\u003D");
     button->SetFont(font);
     this->grid->Add(button, 0, wxEXPAND);
     //<-6
