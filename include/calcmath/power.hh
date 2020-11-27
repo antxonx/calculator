@@ -3,7 +3,7 @@
 
 namespace Calculator
 {
-    //extern "C" double sqroot(double operand);
+    extern "C" double sqroot(double operand);
     extern "C" double sqexp(double operand);
 } // namespace Calculator
 
