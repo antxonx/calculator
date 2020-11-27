@@ -120,9 +120,11 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
     wxString newValue;
     wxButton *button = wxDynamicCast(event.GetEventObject(), wxButton);
     wxString actualValue = this->display->GetValue();
+    //Which button
     switch (button->GetId())
     {
     case CALC_CLS:
+        //clear screen and reset
         this->clearScreen();
         this->stored = 0.0;
         this->oper = OP_NONE;
@@ -130,11 +132,14 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
     case CALC_BACK:
         if (this->isDisplayOneDigit())
         {
+            //clear screen if one digit
             this->clearScreen();
         }
         else
         {
+            //else just remove las character
             char deleted = actualValue.Last();
+            //Change decimalPoint state if needed
             if (deleted == DISPLAY_DECIMAL)
             {
                 this->decimalPoint = false;
@@ -148,6 +153,7 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
         }
         break;
     case CALC_POINT:
+        //add decimal point if not added before
         if (!this->decimalPoint)
         {
             newValue = this->display->GetValue() + DISPLAY_DECIMAL;
@@ -156,35 +162,41 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
         }
         break;
     case CALC_DIV:
+        //operate and set operation
         this->operate();
         this->newValue = true;
         this->oper = OP_DIV;
         break;
     case CALC_TIMES:
+        //operate and set operation
         this->operate();
         this->newValue = true;
         this->oper = OP_TIMES;
         break;
     case CALC_MINUS:
+        //operate and set operation
         this->operate();
         this->newValue = true;
         this->oper = OP_SUB;
         break;
     case CALC_PLUS:
+        //operate and set operation
         this->operate();
         this->newValue = true;
         this->oper = OP_ADD;
         break;
     case CALC_EQUAL:
+        //operate and reset operation
         if (!this->oper == OP_NONE)
         {
             this->operate();
         }
         this->oper = OP_NONE;
         break;
-    case CALC_NEGATIVE:
+    case CALC_NEGATIVE://if not zero
         if (!this->isDisplayZero())
         {
+            //change negative symbol
             if (this->negative)
             {
                 newValue = actualValue.substr(1, actualValue.length());
@@ -198,16 +210,20 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
         }
         break;
     default:
+        //number buttom
         if (this->newValue)
         {
+            //rewrite screen after operation
             this->clearScreen();
         }
         if (this->isDisplayZero())
         {
+            //no left trailing zeros
             this->display->ChangeValue(button->GetLabelText());
         }
         else
         {
+            //add number to the right
             newValue = this->display->GetValue() + button->GetLabelText();
             this->display->ChangeValue(newValue);
         }
@@ -218,6 +234,7 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
 
 void CalculatorWindow::clearScreen()
 {
+    //change display value to zero
     this->display->ChangeValue(DISPLAY_ZERO);
     this->decimalPoint = false;
     this->negative = false;
@@ -229,6 +246,7 @@ bool CalculatorWindow::isDisplayZero()
     {
         if (this->negative)
         {
+            //avoid "-0"
             return (this->display->GetValue().IsSameAs("-" + DISPLAY_ZERO));
         }
         else
@@ -260,7 +278,9 @@ void CalculatorWindow::operate()
     char output[DISPLAY_BURFFER_SIZE], preoutput[DISPLAY_BURFFER_SIZE];
     int i;
     this->decimalPoint = false;
+    //get display as double
     this->display->GetValue().ToDouble(&screenValue);
+    //asm lib
     switch (this->oper)
     {
     case OP_ADD:
@@ -279,7 +299,9 @@ void CalculatorWindow::operate()
         this->stored = screenValue;
         break;
     }
+    //stringify the result
     strncpy(preoutput, wxString::Format("%f", this->stored).mb_str().data(), DISPLAY_BURFFER_SIZE);
+    //remove trailing right zeros
     for (i = DISPLAY_BURFFER_SIZE - 1; i >= 0; i--)
     {
         this->decimalPoint = (preoutput[i] != '0' && preoutput[i] != 0 && preoutput[i] != '.');
@@ -288,12 +310,17 @@ void CalculatorWindow::operate()
             break;
         }
     }
+    //if there is a decimal value we add one character, else we don't take the decimal point
     if (this->decimalPoint)
     {
         i++;
     }
+    //clear output
     strncpy(output, preoutput, i);
+    //end of string
     output[i] = 0;
+    //set negative if needed
     this->negative = (output[0] == '-');
+    //update screen
     this->display->ChangeValue(output);
 }
