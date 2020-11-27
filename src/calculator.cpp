@@ -273,7 +273,7 @@ void CalculatorWindow::operate()
         this->stored = mul(this->stored, screenValue);
         break;
     case OP_DIV:
-        this->stored = this->stored / screenValue;
+        this->stored = div(this->stored, screenValue);
         break;
     default:
         this->stored = screenValue;

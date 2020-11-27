@@ -7,6 +7,7 @@ section .text
 global add:function
 global sub:function
 global mul:function
+global div:function
 add:
     push rbp
     mov rbp, rsp
@@ -23,7 +24,6 @@ add:
 
     leave
     ret
-
 sub:
     push rbp
     mov rbp, rsp
@@ -40,7 +40,6 @@ sub:
 
     leave
     ret
-
 mul:
     push rbp
     mov rbp, rsp
@@ -51,6 +50,22 @@ mul:
     fld qword[rel operand2]
 
     fmul
+
+    fstp qword[rel tmp]
+    movsd xmm0, [rel tmp]
+
+    leave
+    ret
+div:
+    push rbp
+    mov rbp, rsp
+
+    movsd [rel operand1], xmm0
+    movsd [rel operand2], xmm1
+    fld qword[rel operand1]
+    fld qword[rel operand2]
+
+    fdiv
 
     fstp qword[rel tmp]
     movsd xmm0, [rel tmp]
