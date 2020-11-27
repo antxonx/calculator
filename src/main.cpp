@@ -3,7 +3,6 @@
 #include <exception>
 #include <cstdio>
 #include <unistd.h>
-#include <iostream>
 #define GetCurrentDir getcwd
 
 wxIMPLEMENT_APP(MyApp);
