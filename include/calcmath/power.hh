@@ -1,4 +1,4 @@
-#ifndef CALC_MATH_POWERHH
+#ifndef CALC_MATH_POWER_HH
 #define CALC_MATH_POWER_HH
 
 namespace Calculator
