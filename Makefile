@@ -55,7 +55,6 @@ SOURCES		:= $(wildcard $(patsubst %,%/*.cpp, $(SOURCEDIRS)))
 
 # define the C object files 
 OBJECTS		:= $(SOURCES:.cpp=.o)
-LIBS        := $(wildcard $(patsubst %,%/*.a, $(SOURCEDIRS)))
 
 #
 # The following part of the makefile is generic; it can be used to 
@@ -72,7 +71,7 @@ $(OUTPUT):
 	$(MD) $(OUTPUT)
 
 $(MAIN): $(OBJECTS) 
-	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $(OUTPUTMAIN) $(OBJECTS) $(LIBS) $(LFLAGS) $(LIBS)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $(OUTPUTMAIN) $(OBJECTS) $(LFLAGS) $(LIBS) -Lcalcmath -l:arith.so
 
 # this is a suffix replacement rule for building .o's from .c's
 # it uses automatic variables $<: the name of the prerequisite of

@@ -1,3 +1,5 @@
+#ifndef MAIN_HH
+#define MAIN_HH
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
@@ -8,3 +10,4 @@ class MyApp : public wxApp
 public:
     virtual bool OnInit();
 };
+#endif

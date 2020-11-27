@@ -1,4 +1,4 @@
-#include <calculator.h>
+#include <calculator.hh>
 
 using namespace Calculator;
 
@@ -264,16 +264,16 @@ void CalculatorWindow::operate()
     switch (this->oper)
     {
     case OP_ADD:
-        this->stored = (this->stored + screenValue);
+        this->stored = add(this->stored, screenValue);
         break;
     case OP_SUB:
-        this->stored = this->stored - screenValue;
+        this->stored = sub(this->stored, screenValue);
         break;
     case OP_TIMES:
-        this->stored = this->stored * screenValue;
+        this->stored = mul(this->stored, screenValue);
         break;
     case OP_DIV:
-        this->stored = this->stored / screenValue;
+        this->stored = div(this->stored, screenValue);
         break;
     default:
         this->stored = screenValue;
