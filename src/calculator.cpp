@@ -222,6 +222,7 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
         //operate and set operation
         this->oper = OP_SQ_ROOT;
         this->operate();
+        this->oper = OP_NONE;
         this->newValue = true;
         break;
     break;   
@@ -229,6 +230,7 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
         //operate and set operation
         this->oper = OP_SQ_EXP;
         this->operate();
+        this->oper = OP_NONE;
         this->newValue = true;
         break;
     break;
