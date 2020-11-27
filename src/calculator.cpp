@@ -40,8 +40,12 @@ void CalculatorWindow::build()
     //<-1
     //2->
     this->grid->Add(new wxStaticText(this, wxID_ANY, wxEmptyString), 0, wxEXPAND);
-    this->grid->Add(new wxStaticText(this, wxID_ANY, wxEmptyString), 0, wxEXPAND);
-    this->grid->Add(new wxStaticText(this, wxID_ANY, wxEmptyString), 0, wxEXPAND);
+    button = new wxButton(this, CALC_SQUARE_EXP, L"x\u00B2");
+    button->SetFont(font);
+    this->grid->Add(button, 0, wxEXPAND);
+    button = new wxButton(this, CALC_SQUARE_ROOT, L"\u221A");
+    button->SetFont(font);
+    this->grid->Add(button, 0, wxEXPAND);
     button = new wxButton(this, CALC_DIV, "/");
     button->SetFont(font);
     this->grid->Add(button, 0, wxEXPAND);
@@ -214,6 +218,20 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
             this->display->ChangeValue(newValue);
         }
         break;
+    case CALC_SQUARE_ROOT:
+        //operate and set operation
+        this->oper = OP_SQ_ROOT;
+        this->operate();
+        this->newValue = true;
+        break;
+    break;   
+    case CALC_SQUARE_EXP:
+        //operate and set operation
+        this->oper = OP_SQ_EXP;
+        this->operate();
+        this->newValue = true;
+        break;
+    break;
     default:
         //number buttom
         if (this->newValue)
@@ -300,6 +318,12 @@ void CalculatorWindow::operate()
     case OP_DIV:
         this->stored = div(this->stored, screenValue);
         break;
+    case OP_SQ_ROOT:
+        this->stored = sqrt(screenValue);
+        break;
+    case OP_SQ_EXP:
+        this->stored = screenValue * screenValue;
+        break;            
     default:
         this->stored = screenValue;
         break;
