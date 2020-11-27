@@ -29,8 +29,8 @@ CalculatorWindow::CalculatorWindow(wxSize size) : wxFrame(NULL, wxID_ANY, "Calcu
     button = new wxButton(this, CALC_CLS, "C");
     button->SetFont(font);
     this->grid->Add(button, 0, wxEXPAND);
-    button = new wxButton(this, CALC_BACK, "<-");
-    button->SetFont(font);
+    button = new wxButton(this, CALC_BACK, L"\u232B");
+    button->SetFont(wxFont(wxFontInfo(DISPLAY_FONT_SIZE)));
     this->grid->Add(button, 0, wxEXPAND);
     //<-1
     //2->
