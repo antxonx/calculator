@@ -7,7 +7,7 @@
 #include <wx/grid.h>
 #include <wx/font.h>
 #include <cstring>
-#include <calcmath/arith.hh>
+#include <calcmath/calcmath.hh>
 namespace Calculator
 {
     const wxString DISPLAY_ZERO = "0";

@@ -322,7 +322,7 @@ void CalculatorWindow::operate()
         this->stored = sqrt(screenValue);
         break;
     case OP_SQ_EXP:
-        this->stored = screenValue * screenValue;
+        this->stored = sqexp(screenValue);
         break;            
     default:
         this->stored = screenValue;
