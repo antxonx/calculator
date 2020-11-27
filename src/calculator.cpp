@@ -264,7 +264,7 @@ void CalculatorWindow::operate()
     switch (this->oper)
     {
     case OP_ADD:
-        this->stored = add(this->stored, screenValue);//(this->stored + screenValue);
+        this->stored = add(this->stored, screenValue);
         break;
     case OP_SUB:
         this->stored = this->stored - screenValue;
