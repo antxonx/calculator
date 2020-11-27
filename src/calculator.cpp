@@ -24,7 +24,7 @@ void CalculatorWindow::build()
     this->display = new wxTextCtrl(this, DISPLAY_ID, DISPLAY_ZERO, wxDefaultPosition, wxDefaultSize, wxTE_RIGHT | wxTE_READONLY);
     this->display->SetFont(font);
     //Add displey to container
-    this->box->Add(this->display, 0, wxEXPAND | wxTOP | wxBOTTOM, 10);
+    this->box->Add(this->display, wxSizerFlags(1).Expand().Border(wxDirection::wxALL, 10));
     //Grid element for buttons
     this->grid = new wxGridSizer(6, 4, 3, 3);
     //Buttons definitions
@@ -107,10 +107,11 @@ void CalculatorWindow::build()
     this->grid->Add(button, 0, wxEXPAND);
     //<-6
     //Add buttons grid to container
-    this->box->Add(this->grid, 1, wxEXPAND);
+    this->box->Add(this->grid,wxSizerFlags(1).Expand().Border(wxDirection::wxALL, 10));
     this->SetSizer(this->box);
     this->SetMinSize(this->size);
     this->Centre();
+    this->display->SetCanFocus(false);
     //Handle events
     this->Bind(wxEVT_MENU, &CalculatorWindow::onExit, this, wxID_EXIT);
     for (const Calculator::OPTIONS OPT : All)
