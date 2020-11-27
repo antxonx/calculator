@@ -267,10 +267,10 @@ void CalculatorWindow::operate()
         this->stored = add(this->stored, screenValue);
         break;
     case OP_SUB:
-        this->stored = sub(this->stored, screenValue);//this->stored - screenValue;
+        this->stored = sub(this->stored, screenValue);
         break;
     case OP_TIMES:
-        this->stored = this->stored * screenValue;
+        this->stored = mul(this->stored, screenValue);
         break;
     case OP_DIV:
         this->stored = this->stored / screenValue;
