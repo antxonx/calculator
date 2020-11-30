@@ -23,7 +23,8 @@ namespace Calculator
         OP_TIMES,
         OP_DIV,
         OP_SQ_ROOT,
-        OP_SQ_EXP
+        OP_SQ_EXP,
+        OP_LOG
     } OPER;
     enum OPTIONS
     {
@@ -47,7 +48,8 @@ namespace Calculator
         CALC_POINT,
         CALC_NEGATIVE,
         CALC_SQUARE_ROOT,
-        CALC_SQUARE_EXP
+        CALC_SQUARE_EXP,
+        CALC_LOG
     };
     const OPTIONS All[] = {
         CALC_0,
@@ -70,7 +72,8 @@ namespace Calculator
         CALC_POINT,
         CALC_NEGATIVE,
         CALC_SQUARE_ROOT,
-        CALC_SQUARE_EXP
+        CALC_SQUARE_EXP,
+        CALC_LOG
         };
 
     class CalculatorWindow : public wxFrame
