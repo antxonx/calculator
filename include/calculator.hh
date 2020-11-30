@@ -12,6 +12,8 @@ namespace Calculator
 {
     const wxString DISPLAY_ZERO = "0";
     const wxString DISPLAY_DECIMAL = ".";
+    const wxString DISPLAY_DEG = "deg";
+    const wxString DISPLAY_RAD = "rad";
     const unsigned int DISPLAY_FONT_SIZE = 20;
     const unsigned int DISPLAY_BURFFER_SIZE = 50;
     const unsigned int DISPLAY_ID = 50;
@@ -104,6 +106,8 @@ namespace Calculator
         bool decimalPoint;
         bool negative;
         bool newValue;
+        bool degrees;
+        wxStaticText *degRad;
         OPER oper;
         double stored;
         wxSize size;

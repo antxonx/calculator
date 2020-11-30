@@ -14,9 +14,11 @@ void CalculatorWindow::build()
     //Container
     this->box = new wxBoxSizer(wxVERTICAL);
     //Display element
+    this->degRad = new wxStaticText(this, wxID_ANY, DISPLAY_DEG);
     this->display = new wxTextCtrl(this, DISPLAY_ID, DISPLAY_ZERO, wxDefaultPosition, wxDefaultSize, wxTE_RIGHT | wxTE_READONLY);
     this->display->SetFont(font);
-    //Add displey to container
+    //Add display to container
+    this->box->Add(this->degRad, wxSizerFlags(1).Expand().Border(wxDirection::wxLEFT | wxDirection::wxRIGHT, 10));
     this->box->Add(this->display, wxSizerFlags(1).Expand().Border(wxDirection::wxALL, 10));
     //Grid element for buttons
     this->grid = new wxGridSizer(7, 4, 3, 3);

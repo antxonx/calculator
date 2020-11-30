@@ -38,12 +38,21 @@ void CalculatorWindow::operate()
         this->stored = log(screenValue);
         break;
     case OP_SIN:
+        if(this->degrees) {
+            screenValue = degreesToRadians(screenValue);
+        }
         this->stored = sin(screenValue);
         break;
     case OP_COS:
+        if(this->degrees) {
+            screenValue = degreesToRadians(screenValue);
+        }
         this->stored = cos(screenValue);
         break;
     case OP_TAN:
+        if(this->degrees) {
+            screenValue = degreesToRadians(screenValue);
+        }
         this->stored = tan(screenValue);
         break;
     default:

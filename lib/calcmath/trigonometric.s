@@ -3,10 +3,12 @@ section .bss
 operand: resq 1
 result: resq 1
 temp: resq 1
+deg: resq 1
 section .text
 global sin:function
 global cos:function
 global tan:function
+global degreesToRadians:function
 sin:
     push rbp
     mov rbp, rsp
@@ -50,4 +52,21 @@ sin_calc:
 cos_calc:
     fcos
     fstp qword[rel result]
+    ret
+
+degreesToRadians:
+    push rbp
+    mov rbp, rsp
+    movsd [rel operand], xmm0
+    mov qword[rel deg], 180
+    fldpi
+    fild qword[rel deg]
+    fdiv
+    fstp qword[rel result]
+    fld qword[rel operand]
+    fld qword[rel result]
+    fmul
+    fstp qword[rel result]
+    movsd xmm0, [rel result]
+    leave
     ret
