@@ -4,5 +4,6 @@
 #include <calcmath/arith.hh>
 #include <calcmath/power.hh>
 #include <calcmath/log.hh>
+#include <calcmath/trigonometric.hh>
 
 #endif

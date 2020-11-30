@@ -128,6 +128,27 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
         this->oper = OP_NONE;
         this->newValue = true;
         break;
+    case CALC_SIN:
+        //operate and set operation
+        this->oper = OP_SIN;
+        this->operate();
+        this->oper = OP_NONE;
+        this->newValue = true;
+        break;
+    case CALC_COS:
+        //operate and set operation
+        this->oper = OP_COS;
+        this->operate();
+        this->oper = OP_NONE;
+        this->newValue = true;
+        break;
+    case CALC_TAN:
+        //operate and set operation
+        this->oper = OP_TAN;
+        this->operate();
+        this->oper = OP_NONE;
+        this->newValue = true;
+        break;
     default:
         //number buttom
         if (this->newValue)

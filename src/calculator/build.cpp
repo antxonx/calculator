@@ -10,6 +10,7 @@ void CalculatorWindow::build()
     wxButton *button;
     //Font size
     wxFont font = wxFont(wxFontInfo(DISPLAY_FONT_SIZE + 10));
+    wxFont smallFont = wxFont(wxFontInfo(DISPLAY_FONT_SIZE));
     //Container
     this->box = new wxBoxSizer(wxVERTICAL);
     //Display element
@@ -18,25 +19,36 @@ void CalculatorWindow::build()
     //Add displey to container
     this->box->Add(this->display, wxSizerFlags(1).Expand().Border(wxDirection::wxALL, 10));
     //Grid element for buttons
-    this->grid = new wxGridSizer(6, 4, 3, 3);
+    this->grid = new wxGridSizer(7, 4, 3, 3);
     //Buttons definitions
-    //1->
+    //->
+    this->grid->Add(new wxStaticText(this, wxID_ANY, wxEmptyString), 0, wxEXPAND);
+    button = new wxButton(this, CALC_SIN, "sin");
+    button->SetFont(smallFont);
+    this->grid->Add(button, 0, wxEXPAND);
+    button = new wxButton(this, CALC_COS, "cos");
+    button->SetFont(smallFont);
+    this->grid->Add(button, 0, wxEXPAND);
+    button = new wxButton(this, CALC_TAN, "tan");
+    button->SetFont(smallFont);
+    this->grid->Add(button, 0, wxEXPAND);
+    //<-
+    //->
     this->grid->Add(new wxStaticText(this, wxID_ANY, wxEmptyString), 0, wxEXPAND);
     this->grid->Add(new wxStaticText(this, wxID_ANY, wxEmptyString), 0, wxEXPAND);
     button = new wxButton(this, CALC_CLS, "C");
     button->SetFont(font);
     this->grid->Add(button, 0, wxEXPAND);
     button = new wxButton(this, CALC_BACK, L"\u232B");
-    button->SetFont(wxFont(wxFontInfo(DISPLAY_FONT_SIZE)));
+    button->SetFont(smallFont);
     this->grid->Add(button, 0, wxEXPAND);
-    //<-1
-    //2->
+    //<-
+    //->
     button = new wxButton(this, CALC_LOG, "Log");
-    button->SetFont(font);
+    button->SetFont(smallFont);
     this->grid->Add(button, 0, wxEXPAND);
-    //this->grid->Add(new wxStaticText(this, wxID_ANY, wxEmptyString), 0, wxEXPAND);
     button = new wxButton(this, CALC_SQUARE_EXP, L"x\u00B2");
-    button->SetFont(font);
+    button->SetFont(smallFont);
     this->grid->Add(button, 0, wxEXPAND);
     button = new wxButton(this, CALC_SQUARE_ROOT, L"\u221A");
     button->SetFont(font);
@@ -44,8 +56,8 @@ void CalculatorWindow::build()
     button = new wxButton(this, CALC_DIV, L"\u00F7");
     button->SetFont(font);
     this->grid->Add(button, 0, wxEXPAND);
-    //<-2
-    //3->
+    //<-
+    //->
     button = new wxButton(this, CALC_7, "7");
     button->SetFont(font);
     this->grid->Add(button, 0, wxEXPAND);
@@ -58,8 +70,8 @@ void CalculatorWindow::build()
     button = new wxButton(this, CALC_TIMES, L"\u2A2F");
     button->SetFont(font);
     this->grid->Add(button, 0, wxEXPAND);
-    //<-3
-    //4->
+    //<-
+    //->
     button = new wxButton(this, CALC_4, "4");
     button->SetFont(font);
     this->grid->Add(button, 0, wxEXPAND);
@@ -72,8 +84,8 @@ void CalculatorWindow::build()
     button = new wxButton(this, CALC_MINUS, L"\u2212");
     button->SetFont(font);
     this->grid->Add(button, 0, wxEXPAND);
-    //<-4
-    //5->
+    //<-
+    //->
     button = new wxButton(this, CALC_1, "1");
     button->SetFont(font);
     this->grid->Add(button, 0, wxEXPAND);
@@ -86,8 +98,8 @@ void CalculatorWindow::build()
     button = new wxButton(this, CALC_PLUS, L"\u002B");
     button->SetFont(font);
     this->grid->Add(button, 0, wxEXPAND);
-    //<-5
-    //6->
+    //<-
+    //->
     button = new wxButton(this, CALC_NEGATIVE, L"\u207A\u2044\u208B");
     button->SetFont(font);
     this->grid->Add(button, 0, wxEXPAND);
@@ -100,7 +112,7 @@ void CalculatorWindow::build()
     button = new wxButton(this, CALC_EQUAL, L"\u003D");
     button->SetFont(font);
     this->grid->Add(button, 0, wxEXPAND);
-    //<-6
+    //<-
     //Add buttons grid to container
     this->box->Add(this->grid,wxSizerFlags(1).Expand().Border(wxDirection::wxALL, 10));
     this->SetSizer(this->box);

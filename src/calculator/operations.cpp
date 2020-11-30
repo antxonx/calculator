@@ -36,7 +36,16 @@ void CalculatorWindow::operate()
         break;     
     case OP_LOG:
         this->stored = log(screenValue);
-        break;        
+        break;
+    case OP_SIN:
+        this->stored = sin(screenValue);
+        break;
+    case OP_COS:
+        this->stored = cos(screenValue);
+        break;
+    case OP_TAN:
+        this->stored = tan(screenValue);
+        break;
     default:
         this->stored = screenValue;
         break;
