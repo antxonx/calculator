@@ -25,6 +25,18 @@ void CalculatorWindow::build()
     //Buttons definitions
     //->
     this->grid->Add(new wxStaticText(this, wxID_ANY, wxEmptyString), 0, wxEXPAND);
+    this->grid->Add(new wxStaticText(this, wxID_ANY, wxEmptyString), 0, wxEXPAND);
+    button = new wxButton(this, CALC_CLS, "C");
+    button->SetFont(font);
+    this->grid->Add(button, 0, wxEXPAND);
+    button = new wxButton(this, CALC_BACK, L"\u232B");
+    button->SetFont(smallFont);
+    this->grid->Add(button, 0, wxEXPAND);
+    //<-
+    //->
+    button = new wxButton(this, CALC_DEG_RAD, "dr");
+    button->SetFont(smallFont);
+    this->grid->Add(button, 0, wxEXPAND);
     button = new wxButton(this, CALC_SIN, "sin");
     button->SetFont(smallFont);
     this->grid->Add(button, 0, wxEXPAND);
@@ -32,16 +44,6 @@ void CalculatorWindow::build()
     button->SetFont(smallFont);
     this->grid->Add(button, 0, wxEXPAND);
     button = new wxButton(this, CALC_TAN, "tan");
-    button->SetFont(smallFont);
-    this->grid->Add(button, 0, wxEXPAND);
-    //<-
-    //->
-    this->grid->Add(new wxStaticText(this, wxID_ANY, wxEmptyString), 0, wxEXPAND);
-    this->grid->Add(new wxStaticText(this, wxID_ANY, wxEmptyString), 0, wxEXPAND);
-    button = new wxButton(this, CALC_CLS, "C");
-    button->SetFont(font);
-    this->grid->Add(button, 0, wxEXPAND);
-    button = new wxButton(this, CALC_BACK, L"\u232B");
     button->SetFont(smallFont);
     this->grid->Add(button, 0, wxEXPAND);
     //<-

@@ -57,7 +57,8 @@ namespace Calculator
         CALC_LOG,
         CALC_SIN,
         CALC_COS,
-        CALC_TAN
+        CALC_TAN,
+        CALC_DEG_RAD
     };
     const OPTIONS All[] = {
         CALC_0,
@@ -84,7 +85,8 @@ namespace Calculator
         CALC_LOG,
         CALC_SIN,
         CALC_COS,
-        CALC_TAN
+        CALC_TAN,
+        CALC_DEG_RAD
         };
 
     class CalculatorWindow : public wxFrame

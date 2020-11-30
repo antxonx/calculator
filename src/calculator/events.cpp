@@ -149,6 +149,14 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
         this->oper = OP_NONE;
         this->newValue = true;
         break;
+    case CALC_DEG_RAD:
+        this->degrees = !this->degrees;
+        if(this->degrees) {
+            this->degRad->SetLabelText(DISPLAY_DEG);
+        } else {
+            this->degRad->SetLabelText(DISPLAY_RAD);
+        }
+        break;
     default:
         //number buttom
         if (this->newValue)
