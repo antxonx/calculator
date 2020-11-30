@@ -10,6 +10,7 @@ CalculatorWindow::CalculatorWindow(wxSize size) : wxFrame(NULL, wxID_ANY, "Calcu
     this->negative = false;
     this->decimalPoint = false;
     this->newValue = false;
+    this->degrees = true;
     this->oper = OP_NONE;
     this->stored = 0.0;
     this->size = size;

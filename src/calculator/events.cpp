@@ -128,6 +128,35 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
         this->oper = OP_NONE;
         this->newValue = true;
         break;
+    case CALC_SIN:
+        //operate and set operation
+        this->oper = OP_SIN;
+        this->operate();
+        this->oper = OP_NONE;
+        this->newValue = true;
+        break;
+    case CALC_COS:
+        //operate and set operation
+        this->oper = OP_COS;
+        this->operate();
+        this->oper = OP_NONE;
+        this->newValue = true;
+        break;
+    case CALC_TAN:
+        //operate and set operation
+        this->oper = OP_TAN;
+        this->operate();
+        this->oper = OP_NONE;
+        this->newValue = true;
+        break;
+    case CALC_DEG_RAD:
+        this->degrees = !this->degrees;
+        if(this->degrees) {
+            this->degRad->SetLabelText(DISPLAY_DEG);
+        } else {
+            this->degRad->SetLabelText(DISPLAY_RAD);
+        }
+        break;
     default:
         //number buttom
         if (this->newValue)
