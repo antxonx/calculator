@@ -33,7 +33,10 @@ void CalculatorWindow::operate()
         break;
     case OP_SQ_EXP:
         this->stored = sqexp(screenValue);
-        break;            
+        break;     
+    case OP_LOG:
+        this->stored = log(screenValue);
+        break;        
     default:
         this->stored = screenValue;
         break;

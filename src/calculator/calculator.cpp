@@ -1,3 +1,6 @@
+/**
+ * Constructor and utilities
+ */
 #include <calculator.hh>
 
 using namespace Calculator;

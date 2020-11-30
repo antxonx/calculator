@@ -31,7 +31,10 @@ void CalculatorWindow::build()
     this->grid->Add(button, 0, wxEXPAND);
     //<-1
     //2->
-    this->grid->Add(new wxStaticText(this, wxID_ANY, wxEmptyString), 0, wxEXPAND);
+    button = new wxButton(this, CALC_LOG, "Log");
+    button->SetFont(font);
+    this->grid->Add(button, 0, wxEXPAND);
+    //this->grid->Add(new wxStaticText(this, wxID_ANY, wxEmptyString), 0, wxEXPAND);
     button = new wxButton(this, CALC_SQUARE_EXP, L"x\u00B2");
     button->SetFont(font);
     this->grid->Add(button, 0, wxEXPAND);
