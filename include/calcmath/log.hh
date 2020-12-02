@@ -4,6 +4,7 @@
 namespace Calculator 
 {
     extern "C" double log(double operand);
+    extern "C" double antilog(double operand);
 }
 
 #endif

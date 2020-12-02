@@ -128,6 +128,13 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
         this->oper = OP_NONE;
         this->newValue = true;
         break;
+    case CALC_ANTILOG:
+        //operate and set operation
+        this->oper = OP_ANTILOG;
+        this->operate();
+        this->oper = OP_NONE;
+        this->newValue = true;
+        break;
     case CALC_SIN:
         //operate and set operation
         this->oper = OP_SIN;
