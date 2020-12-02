@@ -108,12 +108,9 @@ arcsin:
     fld qword[rel temp]
     fsqrt 
     fstp qword[rel temp]
+
     fld qword[rel operand]
     fld qword[rel temp]
-    fdiv
-    fstp qword[rel temp]
-    fld qword[rel temp]
-    fld1
     fpatan
     fstp qword[rel result]
     movsd xmm0, [rel result]
