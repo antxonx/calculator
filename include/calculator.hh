@@ -29,7 +29,10 @@ namespace Calculator
         OP_LOG,
         OP_SIN,
         OP_COS,
-        OP_TAN
+        OP_TAN,
+        OP_ARCSIN,
+        OP_ARCCOS,
+        OP_ARCTAN
     } OPER;
     enum OPTIONS
     {
@@ -58,7 +61,10 @@ namespace Calculator
         CALC_SIN,
         CALC_COS,
         CALC_TAN,
-        CALC_DEG_RAD
+        CALC_DEG_RAD,
+        CALC_ARCSIN,
+        CALC_ARCCOS,
+        CALC_ARCTAN
     };
     const OPTIONS All[] = {
         CALC_0,
@@ -86,7 +92,10 @@ namespace Calculator
         CALC_SIN,
         CALC_COS,
         CALC_TAN,
-        CALC_DEG_RAD
+        CALC_DEG_RAD,
+        CALC_ARCSIN,
+        CALC_ARCCOS,
+        CALC_ARCTAN
         };
 
     class CalculatorWindow : public wxFrame

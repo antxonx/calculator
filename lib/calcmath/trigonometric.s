@@ -8,7 +8,11 @@ section .text
 global sin:function
 global cos:function
 global tan:function
+global arcsin:function
+global arctan:function
+global arccos:function
 global degreesToRadians:function
+global radiansToDegrees:function
 sin:
     push rbp
     mov rbp, rsp
@@ -68,5 +72,77 @@ degreesToRadians:
     fmul
     fstp qword[rel result]
     movsd xmm0, [rel result]
+    leave
+    ret
+
+radiansToDegrees:
+    push rbp
+    mov rbp, rsp
+    movsd [rel operand], xmm0
+    mov qword[rel deg], 180
+    fild qword[rel deg]
+    fldpi
+    fdiv
+    fstp qword[rel result]
+    fld qword[rel operand]
+    fld qword[rel result]
+    fmul
+    fstp qword[rel result]
+    movsd xmm0, [rel result]
+    leave
+    ret
+
+arcsin:
+    push rbp
+    mov rbp, rsp
+    movsd [rel operand], xmm0
+    fld qword[rel operand]
+    fld qword[rel operand]
+    fmul
+    fstp qword[rel temp]
+    fld1
+    fld qword[rel temp]
+    fsub
+    fstp qword[rel temp]
+    fld qword[rel temp]
+    fsqrt 
+    fstp qword[rel temp]
+    fld qword[rel operand]
+    fld qword[rel temp]
+    fpatan
+    fstp qword[rel result]
+    movsd xmm0, [rel result]
+    leave
+    ret
+
+arctan:
+    push rbp
+    mov rbp, rsp
+    movsd [rel operand], xmm0
+    fld qword[rel operand]
+    fld1
+    fpatan
+    fstp qword[rel result]
+    movsd xmm0, [rel result]
+    leave
+    ret
+
+arccos:
+    push rbp
+    mov rbp, rsp
+    movsd [rel operand], xmm0
+    fld qword[rel operand]
+    fld qword[rel operand]
+    fmul 
+    fstp qword[rel temp]
+    fld1
+    fld qword[rel temp]
+    fsub
+    fstp qword[rel temp]
+    fld qword[rel temp]
+    fsqrt
+    fstp qword[rel result]
+    movsd xmm0, [rel result]
+    call arcsin
     leave
     ret
