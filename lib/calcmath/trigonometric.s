@@ -97,64 +97,50 @@ arcsin:
     push rbp
     mov rbp, rsp
     movsd [rel operand], xmm0
-
     fld1
     fstp qword[rel frac]
-
     fld qword[rel operand]
     fstp qword[rel xpow]
-
     fld qword[rel operand]
     fstp qword[rel result]
-
     mov rcx, 3
 arcsinLoop:
     mov qword[rel temp], rcx
     sub qword[rel temp], 2
-
     mov qword[rel div], rcx
     sub qword[rel div], 1
-
     fild qword[rel temp]
     fild qword[rel div]
     fdiv
     fstp qword[rel temp]
-
     fld qword[rel frac]
     fld qword[rel temp]
     fmul
     fstp qword[rel frac]
-
     fld qword[rel operand]
     fld qword[rel operand]
     fmul
     fstp qword[rel temp]
-
     fld qword[rel xpow]
     fld qword[rel temp]
     fmul
     fstp qword[rel xpow]
-
     fld qword[rel frac]
     fld qword[rel xpow]
     fmul
     fstp qword[rel temp]
-
     fld qword[rel temp]
     mov [rel temp], rcx
     fild qword[rel temp]
     fdiv
     fstp qword[rel temp]
-
     fld qword[rel result]
     fld qword[rel temp]
     fadd
     fstp qword[rel result]
-
     add rcx, 2
     cmp rcx, 1000000
     jnge arcsinLoop
-
     movsd xmm0, [rel result]
     leave
     ret
