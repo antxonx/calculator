@@ -61,6 +61,12 @@ void CalculatorWindow::operate()
             this->stored = radiansToDegrees(this->stored);
         }
         break;
+    case OP_ARCTAN:
+        this->stored = arctan(screenValue);
+        if(this->degrees) {
+            this->stored = radiansToDegrees(this->stored);
+        }
+        break;
     default:
         this->stored = screenValue;
         break;

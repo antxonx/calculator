@@ -2,9 +2,6 @@ section .data
 section .bss
 operand: resq 1
 result: resq 1
-frac: resq 1
-xpow: resq 1
-div: resq 1
 temp: resq 1
 deg: resq 1
 section .text
@@ -12,6 +9,7 @@ global sin:function
 global cos:function
 global tan:function
 global arcsin:function
+global arctan:function
 global degreesToRadians:function
 global radiansToDegrees:function
 sin:
@@ -108,9 +106,20 @@ arcsin:
     fld qword[rel temp]
     fsqrt 
     fstp qword[rel temp]
-
     fld qword[rel operand]
     fld qword[rel temp]
+    fpatan
+    fstp qword[rel result]
+    movsd xmm0, [rel result]
+    leave
+    ret
+
+arctan:
+    push rbp
+    mov rbp, rsp
+    movsd [rel operand], xmm0
+    fld qword[rel operand]
+    fld1
     fpatan
     fstp qword[rel result]
     movsd xmm0, [rel result]

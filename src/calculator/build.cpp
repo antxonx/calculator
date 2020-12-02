@@ -41,7 +41,7 @@ void CalculatorWindow::build()
     button = new wxButton(this, CALC_COS, "arccos");
     button->SetFont(smallFont);
     this->grid->Add(button, 0, wxEXPAND);
-    button = new wxButton(this, CALC_TAN, "arctan");
+    button = new wxButton(this, CALC_ARCTAN, "arctan");
     button->SetFont(smallFont);
     this->grid->Add(button, 0, wxEXPAND);
     //<-
