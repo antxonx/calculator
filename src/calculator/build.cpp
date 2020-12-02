@@ -21,7 +21,7 @@ void CalculatorWindow::build()
     this->box->Add(this->degRad, wxSizerFlags(1).Expand().Border(wxDirection::wxLEFT | wxDirection::wxRIGHT, 10));
     this->box->Add(this->display, wxSizerFlags(1).Expand().Border(wxDirection::wxALL, 10));
     //Grid element for buttons
-    this->grid = new wxGridSizer(7, 4, 3, 3);
+    this->grid = new wxGridSizer(8, 4, 3, 3);
     //Buttons definitions
     //->
     this->grid->Add(new wxStaticText(this, wxID_ANY, wxEmptyString), 0, wxEXPAND);
@@ -34,7 +34,19 @@ void CalculatorWindow::build()
     this->grid->Add(button, 0, wxEXPAND);
     //<-
     //->
-    button = new wxButton(this, CALC_DEG_RAD, "dr");
+    this->grid->Add(new wxStaticText(this, wxID_ANY, wxEmptyString), 0, wxEXPAND);
+    button = new wxButton(this, CALC_ARCSIN, "arcsin");
+    button->SetFont(smallFont);
+    this->grid->Add(button, 0, wxEXPAND);
+    button = new wxButton(this, CALC_COS, "arccos");
+    button->SetFont(smallFont);
+    this->grid->Add(button, 0, wxEXPAND);
+    button = new wxButton(this, CALC_TAN, "arctan");
+    button->SetFont(smallFont);
+    this->grid->Add(button, 0, wxEXPAND);
+    //<-
+     //->
+    button = new wxButton(this, CALC_DEG_RAD, "D|R");
     button->SetFont(smallFont);
     this->grid->Add(button, 0, wxEXPAND);
     button = new wxButton(this, CALC_SIN, "sin");

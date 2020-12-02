@@ -149,6 +149,13 @@ void CalculatorWindow::onClick(wxCommandEvent &event)
         this->oper = OP_NONE;
         this->newValue = true;
         break;
+    case CALC_ARCSIN:
+        //operate and set operation
+        this->oper = OP_ARCSIN;
+        this->operate();
+        this->oper = OP_NONE;
+        this->newValue = true;
+        break;
     case CALC_DEG_RAD:
         this->degrees = !this->degrees;
         if(this->degrees) {

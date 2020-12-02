@@ -55,6 +55,12 @@ void CalculatorWindow::operate()
         }
         this->stored = tan(screenValue);
         break;
+    case OP_ARCSIN:
+        this->stored = arcsin(screenValue);
+        if(this->degrees) {
+            this->stored = radiansToDegrees(this->stored);
+        }
+        break;
     default:
         this->stored = screenValue;
         break;
