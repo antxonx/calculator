@@ -5,7 +5,7 @@ tmp: resq 1
 section .text
 global sqexp:function
 global sqroot:function
-sqexp:
+sqexp: ;x*x
     push rbp
     mov rbp, rsp
     movsd [rel operand], xmm0
@@ -16,7 +16,7 @@ sqexp:
     movsd xmm0, [rel tmp]
     leave
     ret
-sqroot:
+sqroot: ;sqrt(x)
     push rbp
     mov rbp, rsp
     movsd [rel operand], xmm0
