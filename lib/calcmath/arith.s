@@ -8,7 +8,7 @@ global add:function
 global sub:function
 global mul:function
 global div:function
-add:
+add: ;fadd(x, y)
     push rbp
     mov rbp, rsp
     movsd [rel operand1], xmm0
@@ -20,7 +20,7 @@ add:
     movsd xmm0, [rel tmp]
     leave
     ret
-sub:
+sub: ;fsub(x, y)
     push rbp
     mov rbp, rsp
     movsd [rel operand1], xmm0
@@ -32,7 +32,7 @@ sub:
     movsd xmm0, [rel tmp]
     leave
     ret
-mul:
+mul: ;fmul(x, y)
     push rbp
     mov rbp, rsp
     movsd [rel operand1], xmm0
@@ -44,7 +44,7 @@ mul:
     movsd xmm0, [rel tmp]
     leave
     ret
-div:
+div: ;fdiv(x, y)
     push rbp
     mov rbp, rsp
     movsd [rel operand1], xmm0

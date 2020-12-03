@@ -6,7 +6,7 @@ tmp: resq 1
 section .text
 global log:function
 global antilog:function
-log:
+log: ;log10(2)*log2(x)
     push rbp
     mov rbp, rsp
     movsd [rel operand], xmm0
@@ -18,7 +18,7 @@ log:
     leave
     ret
 
-antilog:
+antilog: ;2^(x*log2(10))
     push rbp
     mov rbp, rsp
     movsd [rel operand], xmm0

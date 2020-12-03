@@ -31,7 +31,7 @@ cos:
     movsd xmm0, [rel result]
     leave
     ret
-tan:
+tan: ;sin(x)/cos(x)
     push rbp
     mov rbp, rsp
     movsd [rel operand], xmm0
@@ -58,7 +58,7 @@ cos_calc:
     fstp qword[rel result]
     ret
 
-degreesToRadians:
+degreesToRadians: ;x * (180/PI)
     push rbp
     mov rbp, rsp
     movsd [rel operand], xmm0
@@ -75,7 +75,7 @@ degreesToRadians:
     leave
     ret
 
-radiansToDegrees:
+radiansToDegrees: ;x * (PI/180)
     push rbp
     mov rbp, rsp
     movsd [rel operand], xmm0
@@ -92,7 +92,7 @@ radiansToDegrees:
     leave
     ret
 
-arcsin:
+arcsin: ;arctan(x/sqrt(1-x^2))
     push rbp
     mov rbp, rsp
     movsd [rel operand], xmm0
@@ -115,7 +115,7 @@ arcsin:
     leave
     ret
 
-arctan:
+arctan: ;arctan(x/1)
     push rbp
     mov rbp, rsp
     movsd [rel operand], xmm0
@@ -127,7 +127,7 @@ arctan:
     leave
     ret
 
-arccos:
+arccos: ;arctan(sqrt(1-x^2))
     push rbp
     mov rbp, rsp
     movsd [rel operand], xmm0
