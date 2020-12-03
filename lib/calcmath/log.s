@@ -23,7 +23,6 @@ antilog:
     mov rbp, rsp
     movsd [rel operand], xmm0
     mov qword[rel tmp], 10
-
     fld qword[rel operand]
     fild qword[rel tmp]
     fyl2x
