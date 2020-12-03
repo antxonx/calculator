@@ -37,6 +37,9 @@ void CalculatorWindow::operate()
     case OP_LOG:
         this->stored = log(screenValue);
         break;
+    case OP_ANTILOG:
+        this->stored = antilog(screenValue);
+        break;
     case OP_SIN:
         if(this->degrees) {
             screenValue = degreesToRadians(screenValue);

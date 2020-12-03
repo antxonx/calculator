@@ -34,19 +34,21 @@ void CalculatorWindow::build()
     this->grid->Add(button, 0, wxEXPAND);
     //<-
     //->
-    this->grid->Add(new wxStaticText(this, wxID_ANY, wxEmptyString), 0, wxEXPAND);
-    button = new wxButton(this, CALC_ARCSIN, "arcsin");
+    button = new wxButton(this, CALC_DEG_RAD, "rad");
     button->SetFont(smallFont);
     this->grid->Add(button, 0, wxEXPAND);
-    button = new wxButton(this, CALC_ARCCOS, "arccos");
+    button = new wxButton(this, CALC_ARCSIN, L"sin\u207B\u00B9");
     button->SetFont(smallFont);
     this->grid->Add(button, 0, wxEXPAND);
-    button = new wxButton(this, CALC_ARCTAN, "arctan");
+    button = new wxButton(this, CALC_ARCCOS, L"cos\u207B\u00B9");
+    button->SetFont(smallFont);
+    this->grid->Add(button, 0, wxEXPAND);
+    button = new wxButton(this, CALC_ARCTAN, L"tan\u207B\u00B9");
     button->SetFont(smallFont);
     this->grid->Add(button, 0, wxEXPAND);
     //<-
      //->
-    button = new wxButton(this, CALC_DEG_RAD, "D|R");
+    button = new wxButton(this, CALC_ANTILOG, L"10\u207F");
     button->SetFont(smallFont);
     this->grid->Add(button, 0, wxEXPAND);
     button = new wxButton(this, CALC_SIN, "sin");
